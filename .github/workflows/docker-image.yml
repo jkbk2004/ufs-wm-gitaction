@@ -35,7 +35,8 @@ jobs:
     steps:
     - name: Check up-to-dateness and post comment
       run: |
-        head_sha=${{ github.event.workflow_run.head_sha }}
+        #head_sha=${{ github.event.workflow_run.head_sha }}
+        head_sha=${{ github.event.pull_request.base.sha }}
         git clone -q ${{ github.event.workflow_run.head_repository.html_url }} .
         git checkout -q $head_sha
         git submodule -q update --init --recursive

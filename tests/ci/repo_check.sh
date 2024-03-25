@@ -16,7 +16,7 @@ result() {
 declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_framework ccpp_physics atmos_cubed_sphere
 submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_framework ccpp_physics atmos_cubed_sphere"
 comment=''
-#ownerID=$1
+ownerID=$1
 
 # Base branch: this is the top of develop of ufs-weather-model
 base[repo]='https://github.com/ufs-community/ufs-weather-model'
@@ -100,6 +100,7 @@ fi
 for submodule in $submodules; do
   eval cd ${GITHUB_WORKSPACE}/'${'$submodule'[dir]}'
   eval git remote add upstream '${'$submodule'[repo]}'
+  echo ${'$submodule'[branch]}
   eval git fetch -q upstream '${'$submodule'[branch]}'
   common=$(eval git merge-base '${'$submodule'[sha]}' @)
   if (eval test $common != '${'$submodule'[sha]}'); then
@@ -107,5 +108,5 @@ for submodule in $submodules; do
   fi
 done
 
-#result $ownerID
+result $ownerID
 exit 0

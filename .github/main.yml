@@ -45,7 +45,7 @@ jobs:
         pr_number=$(curl -sS -H $app $url/pulls \
           | jq -r '.[] | select(.head.sha == "'"$head_sha"'") | .number')
         echo "pr_number is $pr_number"
-        pr_uid=${{ github.event.pull_request.head_repository.owner.login }}
+        pr_uid=${{ github.event.pull_request.head.repo.owner.login }}
         echo "pr_uid is $pr_uid"
         comment="$(./repo_check.sh $pr_uid)"
         echo "comment is $comment"

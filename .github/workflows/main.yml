@@ -35,7 +35,7 @@ jobs:
       run: |
         echo $helperid
         head_sha=${{ github.event.pull_request.head.sha }}
-        echo {{ github.event.pull_request.base.ref }}
+        echo ${{ github.event.pull_request.base.ref }}
         git clone -q ${{ github.event.workflow_run.head_repository.html_url }} .
         git checkout -q $head_sha
         git submodule -q update --init --recursive

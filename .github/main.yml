@@ -56,4 +56,3 @@ jobs:
         else
           echo -n "success" >~/repocheck_file
         fi
-                

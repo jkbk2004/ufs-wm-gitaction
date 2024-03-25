@@ -12,7 +12,7 @@ result() {
   fi
 }
 
-# Declare variables
+# Declare variable(s)
 declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp-framework ccpp-physics atmos_cubed_sphere
 submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp-framework ccpp-physics atmos_cubed_sphere"
 comment=''

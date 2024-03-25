@@ -100,7 +100,7 @@ fi
 for submodule in $submodules; do
   eval cd ${GITHUB_WORKSPACE}/'${'$submodule'[dir]}'
   eval git remote add upstream '${'$submodule'[repo]}'
-  echo ${'$submodule'[branch]}
+  eval echo '${'$submodule'[repo]}'
   eval git fetch -q upstream '${'$submodule'[branch]}'
   common=$(eval git merge-base '${'$submodule'[sha]}' @)
   if (eval test $common != '${'$submodule'[sha]}'); then

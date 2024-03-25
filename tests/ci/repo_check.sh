@@ -13,14 +13,14 @@ result() {
 }
 
 # Declare variables
-declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp-framework ccpp-physics atmos_cubed_sphere
-submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp-framework ccpp-physics atmos_cubed_sphere"
+declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_framework ccpp_physics atmos_cubed_sphere
+submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_framework ccpp_physics atmos_cubed_sphere"
 comment=''
 ownerID=$1
 
 # Base branch: this is the top of develop of ufs-weather-model
-base[repo]='https://github.com/jkbk2004/ufs-wm-gitaction'
-base[branch]='main'
+base[repo]='https://github.com/ufs-community/ufs-weather-model'
+base[branch]='develop'
 
 # Submodules to check
 fv3[repo]='https://github.com/NOAA-EMC/fv3atm'

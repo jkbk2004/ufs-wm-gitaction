@@ -97,11 +97,13 @@ if [[ $common != ${base[sha]} ]]; then
   comment="* ufs-weather-model **NOT** up to date\n"
 fi
 
+echo 'kimmmmmmmmm'
+
 for submodule in $submodules; do
   eval cd ${GITHUB_WORKSPACE}/'${'$submodule'[dir]}'
   eval git remote add upstream '${'$submodule'[repo]}'
-  eval echo '${'$submodule'[repo]}'
-  eval git fetch -q upstream '${'$submodule'[branch]}'
+  echo '${'$submodule'[repo]}'
+  git fetch -q upstream '${'$submodule'[branch]}'
   common=$(eval git merge-base '${'$submodule'[sha]}' @)
   if (eval test $common != '${'$submodule'[sha]}'); then
     comment+="* $submodule **NOT** up to date\n"

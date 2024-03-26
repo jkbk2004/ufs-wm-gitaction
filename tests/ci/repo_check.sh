@@ -13,8 +13,8 @@ result() {
 }
 
 # Declare variables
-declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom
-submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom"
+declare -A base mom6 cice ww3 stoch gocart cmeps cdeps hycom
+submodules="mom6 cice ww3 stoch gocart cmeps cdeps hycom"
 comment=''
 ownerID=$1
 

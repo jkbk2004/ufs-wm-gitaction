@@ -14,7 +14,7 @@ get_shas () {
     git remote add upstream $url
     git fetch -q upstream $branch
     common=$(git merge-base $base_sha @)
-    echo $common $base_sha $workspace
+    #echo $common $base_sha $workspace
     if [[ $common != $base_sha ]]; then
         comment="* $workspace **NOT** up to date"
         printf "%s\n\n" "$comment"
@@ -66,7 +66,7 @@ get_shas $url $gitapi $branch $workspace
 url='https://github.com/GEOS-ESM/GOCART'
 gitapi='https://api.github.com/repos/GEOS-ESM/GOCART/branches/develop'
 branch='develop'
-workspace='ufs-wm-gitaction/GOCART'
+workspace=${GITHUB_WORKSPACE}/'GOCART'
 get_shas $url $gitapi $branch $workspace
 
 url='https://github.com/NOAA-EMC/CMEPS'

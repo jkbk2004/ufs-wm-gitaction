@@ -13,8 +13,8 @@ result() {
 }
 
 # Declare variables
-declare -A base mom6 cice ww3 stoch gocart cmeps cdeps hycom
-submodules="mom6 cice ww3 stoch gocart cmeps cdeps hycom"
+declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake
+submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake"
 comment=''
 ownerID=$1
 
@@ -39,7 +39,7 @@ ww3[repo]='https://github.com/NOAA-EMC/WW3'
 ww3[branch]='dev/ufs-weather-model'
 ww3[dir]='WW3'
 
-stoch[repo]='https://github.com/noaa-psl/stochastic_physics'
+stoch[repo]='https://github.com/noaa-psd/stochastic_physics'
 stoch[branch]='master'
 stoch[dir]='stochastic_physics'
 
@@ -59,25 +59,9 @@ hycom[repo]='https://github.com/NOAA-EMC/HYCOM-src'
 hycom[branch]='emc/develop'
 hycom[dir]='HYCOM-interface/HYCOM'
 
-#cmake[repo]='https://github.com/NOAA-EMC/CMakeModules'
-#cmake[branch]='develop'
-#cmake[dir]='CMakeModules'
-
-#ccpp_framework[repo]='https://github.com/NCAR/ccpp-framework'
-#ccpp_framework[branch]='main'
-#ccpp_framework[dir]='FV3/ccpp/framework'
-
-#ccpp_physics[repo]='https://github.com/ufs-community/ccpp-physics'
-#ccpp_physics[branch]='ufs/dev'
-#ccpp_physics[dir]='FV3/ccpp/physics'
-
-#upp[repo]='https://github.com/NOAA-EMC/UPP'
-#upp[branch]='develop'
-#upp[dir]='upp'
-
-#atmos_cubed_sphere[repo]='https://github.com/NOAA-GFDL/GFDL_atmos_cubed_sphere'
-#atmos_cubed_sphere[branch]='dev/emc'
-#atmos_cubed_sphere[dir]='FV3/atmos_cubed_sphere'
+cmake[repo]='https://github.com/NOAA-EMC/CMakeModules'
+cmake[branch]='develop'
+cmake[dir]='CMakeModules'
 
 # Get sha-1's of the top of develop of ufs-weather-model
 app="Accept: application/vnd.github.v3+json"
@@ -97,13 +81,10 @@ if [[ $common != ${base[sha]} ]]; then
   comment="* ufs-weather-model **NOT** up to date\n"
 fi
 
-echo 'kimmmmmmmmm'
-
 for submodule in $submodules; do
   eval cd ${GITHUB_WORKSPACE}/'${'$submodule'[dir]}'
   eval git remote add upstream '${'$submodule'[repo]}'
-  echo '${'$submodule'[repo]}'
-  git fetch -q upstream --no-recurse-submodules '${'$submodule'[branch]}'
+  eval git fetch -q upstream '${'$submodule'[branch]}'
   common=$(eval git merge-base '${'$submodule'[sha]}' @)
   if (eval test $common != '${'$submodule'[sha]}'); then
     comment+="* $submodule **NOT** up to date\n"

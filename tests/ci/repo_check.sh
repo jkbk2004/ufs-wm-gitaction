@@ -13,8 +13,8 @@ result() {
 }
 
 # Declare variables
-declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_framework ccpp_physics atmos_cubed_sphere
-submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_framework ccpp_physics atmos_cubed_sphere"
+declare -A base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom
+submodules="fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom"
 comment=''
 ownerID=$1
 
@@ -59,25 +59,25 @@ hycom[repo]='https://github.com/NOAA-EMC/HYCOM-src'
 hycom[branch]='emc/develop'
 hycom[dir]='HYCOM-interface/HYCOM'
 
-cmake[repo]='https://github.com/NOAA-EMC/CMakeModules'
-cmake[branch]='develop'
-cmake[dir]='CMakeModules'
+#cmake[repo]='https://github.com/NOAA-EMC/CMakeModules'
+#cmake[branch]='develop'
+#cmake[dir]='CMakeModules'
 
-ccpp_framework[repo]='https://github.com/NCAR/ccpp-framework'
-ccpp_framework[branch]='main'
-ccpp_framework[dir]='FV3/ccpp/framework'
+#ccpp_framework[repo]='https://github.com/NCAR/ccpp-framework'
+#ccpp_framework[branch]='main'
+#ccpp_framework[dir]='FV3/ccpp/framework'
 
-ccpp_physics[repo]='https://github.com/ufs-community/ccpp-physics'
-ccpp_physics[branch]='ufs/dev'
-ccpp_physics[dir]='FV3/ccpp/physics'
+#ccpp_physics[repo]='https://github.com/ufs-community/ccpp-physics'
+#ccpp_physics[branch]='ufs/dev'
+#ccpp_physics[dir]='FV3/ccpp/physics'
 
 #upp[repo]='https://github.com/NOAA-EMC/UPP'
 #upp[branch]='develop'
 #upp[dir]='upp'
 
-atmos_cubed_sphere[repo]='https://github.com/NOAA-GFDL/GFDL_atmos_cubed_sphere'
-atmos_cubed_sphere[branch]='dev/emc'
-atmos_cubed_sphere[dir]='FV3/atmos_cubed_sphere'
+#atmos_cubed_sphere[repo]='https://github.com/NOAA-GFDL/GFDL_atmos_cubed_sphere'
+#atmos_cubed_sphere[branch]='dev/emc'
+#atmos_cubed_sphere[dir]='FV3/atmos_cubed_sphere'
 
 # Get sha-1's of the top of develop of ufs-weather-model
 app="Accept: application/vnd.github.v3+json"

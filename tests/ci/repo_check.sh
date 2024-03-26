@@ -66,7 +66,7 @@ get_shas $url $gitapi $branch $workspace
 url='https://github.com/GEOS-ESM/GOCART'
 gitapi='https://api.github.com/repos/GEOS-ESM/GOCART/branches/develop'
 branch='develop'
-workspace='ufs-wm-gitaction/GOCART'
+workspace=${GITHUB_WORKSPACE}/'GOCART'
 get_shas $url $gitapi $branch $workspace
 
 url='https://github.com/NOAA-EMC/CMEPS'

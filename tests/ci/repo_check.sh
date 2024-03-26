@@ -27,11 +27,11 @@ flag_sync=true
 
 ownerID=$1
 
-#url='https://github.com/jkbk2004/ufs-wm-gitaction'
-#gitapi='https://api.github.com/repos/jkbk2004/ufs-wm-gitaction/branches/main'
-#branch='main'
-#workspace=${GITHUB_WORKSPACE}
-#get_shas $url $gitapi $branch $workspace
+url='https://github.com/jkbk2004/ufs-wm-gitaction'
+gitapi='https://api.github.com/repos/jkbk2004/ufs-wm-gitaction/branches/main'
+branch='main'
+workspace=${GITHUB_WORKSPACE}
+get_shas $url $gitapi $branch $workspace
 
 url='https://github.com/NOAA-EMC/fv3atm'
 gitapi='https://api.github.com/repos/NOAA-EMC/fv3atm/branches/develop'

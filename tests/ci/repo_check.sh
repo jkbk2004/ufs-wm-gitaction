@@ -108,7 +108,7 @@ for submodule in $submodules; do
     branch=${branches[$submodule]}
     workspace=${GITHUB_WORKSPACE}'/'${pathes[$submodule]}
     gitapi=$(echo "$url" | sed 's/github.com/api.github.com\/repos/g')'/branches/'$branch
-    echo $url $gitapi $branch $workspace
+    get_shas $url $gitapi $branch $workspace
 done
 
 if [[ $flag_sync=='true' ]]; then

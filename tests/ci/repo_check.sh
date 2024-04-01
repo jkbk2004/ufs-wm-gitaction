@@ -16,8 +16,7 @@ get_shas () {
     common=$(git merge-base $base_sha @)
     echo $common $base_sha $workspace
     if [[ $common != $base_sha ]]; then
-        comment+=$workspace
-        comment+=" "
+        printf "%s\n\n" "** $workspace **NOT** up to date"
         flag_sync=false
     fi
     cd $cwd
@@ -111,9 +110,6 @@ for submodule in $submodules; do
     gitapi=$(echo "$url" | sed 's/github.com/api.github.com\/repos/g')'/branches/'$branch
     echo $url $gitapi $branch $workspace
 done
-
-comment+=" **NOT** up to date"
-printf "%s\n\n" "$comment"
 
 if [[ $flag_sync=='true' ]]; then
     exit 0

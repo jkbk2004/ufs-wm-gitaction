@@ -16,8 +16,8 @@ get_shas () {
     common=$(git merge-base $base_sha @)
     echo $common $base_sha $workspace
     if [[ $common != $base_sha ]]; then
-        comment="* $workspace **NOT** up to date"
-        printf "%s\n\n" "$comment"
+        comment+=$workspace
+        comment+=" "
         flag_sync=false
     fi
     cd $cwd
@@ -25,94 +25,98 @@ get_shas () {
 
 flag_sync=true
 
+comment="* "
+
 ownerID=$1
 
-url='https://github.com/jkbk2004/ufs-wm-gitaction'
-gitapi='https://api.github.com/repos/jkbk2004/ufs-wm-gitaction/branches/main'
-branch='main'
-workspace=${GITHUB_WORKSPACE}
-get_shas $url $gitapi $branch $workspace
+declare -A urls branches pathes
+submodules="base fv3 mom6 cice ww3 stoch gocart cmeps cdeps hycom cmake ccpp_physics ccpp_framework aqm noahmp"
 
-url='https://github.com/NOAA-EMC/fv3atm'
-gitapi='https://api.github.com/repos/NOAA-EMC/fv3atm/branches/develop'
-branch='develop'
-workspace=${GITHUB_WORKSPACE}/'FV3'
-get_shas $url $gitapi $branch $workspace
+#urls[base]='https://github.com/ufs-community/ufs-weather-model'
+#branches[base]='develop'
+#pathes[base]=''
 
-url='https://github.com/NOAA-EMC/MOM6'
-gitapi='https://api.github.com/repos/NOAA-EMC/MOM6/branches/dev/emc'
-branch='dev/emc'
-workspace=${GITHUB_WORKSPACE}/'MOM6-interface/MOM6'
-get_shas $url $gitapi $branch $workspace
+urls[base]='https://github.com/jkbk2004/ufs-wm-gitaction'
+branches[base]='main'
+pathes[base]=''
 
-url='https://github.com/NOAA-EMC/CICE'
-gitapi='https://api.github.com/repos/NOAA-EMC/CICE/branches/emc/develop'
-branch='emc/develop'
-workspace=${GITHUB_WORKSPACE}/'CICE-interface/CICE'
-get_shas $url $gitapi $branch $workspace
+urls[fv3]='https://github.com/NOAA-EMC/fv3atm'
+branches[fv3]='develop'
+pathes[fv3]='FV3'
 
-url='https://github.com/NOAA-EMC/WW3'
-gitapi='https://api.github.com/repos/NOAA-EMC/WW3/branches/dev/ufs-weather-model'
-branch='dev/ufs-weather-model'
-workspace=${GITHUB_WORKSPACE}/'WW3'
-get_shas $url $gitapi $branch $workspace
+urls[mom6]='https://github.com/NOAA-EMC/MOM6'
+branches[mom6]='dev/emc'
+pathes[mom6]='MOM6-interface/MOM6'
 
-url='https://github.com/noaa-psl/stochastic_physics'
-gitapi='https://api.github.com/repos/noaa-psl/stochastic_physics/branches/master'
-branch='master'
-workspace=${GITHUB_WORKSPACE}/'stochastic_physics'
-get_shas $url $gitapi $branch $workspace
+urls[cice]='https://github.com/NOAA-EMC/CICE'
+branches[cice]='emc/develop'
+pathes[cice]='CICE-interface/CICE'
 
-url='https://github.com/GEOS-ESM/GOCART'
-gitapi='https://api.github.com/repos/GEOS-ESM/GOCART/branches/develop'
-branch='develop'
-workspace='ufs-wm-gitaction/GOCART'
-get_shas $url $gitapi $branch $workspace
+urls[ww3]='https://github.com/NOAA-EMC/WW3'
+branches[ww3]='dev/ufs-weather-model'
+pathes[ww3]='WW3'
 
-url='https://github.com/NOAA-EMC/CMEPS'
-gitapi='https://api.github.com/repos/NOAA-EMC/CMEPS/branches/emc/develop'
-branch='emc/develop'
-workspace=${GITHUB_WORKSPACE}/'CMEPS-interface/CMEPS'
-get_shas $url $gitapi $branch $workspace
+urls[stoch]='https://github.com/noaa-psl/stochastic_physics'
+branches[stoch]='master'
+pathes[stoch]='stochastic_physics'
 
-url='https://github.com/NOAA-EMC/CDEPS'
-gitapi='https://api.github.com/repos/NOAA-EMC/CDEPS/branches/develop'
-branch='develop'
-workspace=${GITHUB_WORKSPACE}/'CDEPS-interface/CDEPS'
-get_shas $url $gitapi $branch $workspace
+urls[gocart]='https://github.com/GEOS-ESM/GOCART'
+branches[gocart]='develop'
+pathes[gocart]='GOCART'
 
-url='https://github.com/NOAA-EMC/HYCOM-src'
-gitapi='https://api.github.com/repos/NOAA-EMC/HYCOM-src/branches/emc/develop'
-branch='emc/develop'
-workspace=${GITHUB_WORKSPACE}/'HYCOM-interface/HYCOM'
-get_shas $url $gitapi $branch $workspace
+urls[cmeps]='https://github.com/NOAA-EMC/CMEPS'
+branches[cmeps]='emc/develop'
+pathes[cmeps]='CMEPS-interface/CMEPS'
 
-url='https://github.com/NOAA-EMC/CMakeModules'
-gitapi='https://api.github.com/repos/NOAA-EMC/CMakeModules/branches/develop'
-branch='develop'
-workspace=${GITHUB_WORKSPACE}/'CMakeModules'
-get_shas $url $gitapi $branch $workspace
+urls[cdeps]='https://github.com/NOAA-EMC/CDEPS'
+branches[cdeps]='develop'
+pathes[cdeps]='CDEPS-interface/CDEPS'
 
-url='https://github.com/ufs-community/ccpp-physics'
-gitapi='https://api.github.com/repos/ufs-community/ccpp-physics/branches/ufs/dev'
-branch='ufs/dev'
-workspace=${GITHUB_WORKSPACE}/'FV3/ccpp/physics'
-get_shas $url $gitapi $branch $workspace
+urls[hycom]='https://github.com/NOAA-EMC/HYCOM-src'
+branches[hycom]='emc/develop'
+pathes[hycom]='HYCOM-interface/HYCOM'
 
-url='https://github.com/NCAR/ccpp-framework'
-gitapi='https://api.github.com/repos/NCAR/ccpp-framework/branches/main'
-branch='main'
-workspace=${GITHUB_WORKSPACE}/'FV3/ccpp/framework'
-get_shas $url $gitapi $branch $workspace
+urls[cmake]='https://github.com/NOAA-EMC/CMakeModules'
+branches[cmake]='develop'
+pathes[cmake]='CMakeModules'
 
-#url='https://github.com/NOAA-EMC/UPP'
-#gitapi='https://api.github.com/repos/NOAA-EMC/UPP/branches/develop'
-#branch='develop'
-#workspace=${GITHUB_WORKSPACE}/'FV3/upp'
-#get_shas $url $gitapi $branch $workspace
+urls[ccpp_physics]='https://github.com/ufs-community/ccpp-physics'
+branches[ccpp_physics]='ufs/dev'
+pathes[ccpp_physics]='FV3/ccpp/physics'
 
-#url='https://github.com/NOAA-GFDL/GFDL_atmos_cubed_sphere'
-#gitapi='https://api.github.com/repos/NOAA-GFDL/GFDL_atmos_cubed_sphere/branches/dev/emc'
-#branch='dev/emc'
-#workspace=${GITHUB_WORKSPACE}/'FV3/atmos_cubed_sphere'
-#get_shas $url $gitapi $branch $workspace
+urls[ccpp_framework]='https://github.com/NCAR/ccpp-framework'
+branches[ccpp_framework]='main'
+pathes[ccpp_framework]='FV3/ccpp/framework'
+
+urls[aqm]='https://github.com/NOAA-EMC/AQM'
+branches[aqm]='develop'
+pathes[aqm]='AQM'
+
+urls[noahmp]='https://github.com/NOAA-EMC/noahmp'
+branches[noahmp]='develop'
+pathes[noahmp]='NOAHMP-interface/noahmp'
+
+#urls[upp]='https://github.com/NOAA-EMC/UPP'
+#branches[upp]='develop'
+#pathes[upp]='upp'
+
+#urls[cubed_sphere]='https://github.com/NOAA-GFDL/GFDL_atmos_cubed_sphere'
+#branches[cubed_sphere]='dev/emc'
+#pathes[cubed_sphere]='FV3/atmos_cubed_sphere'
+
+for submodule in $submodules; do
+    url=${urls[$submodule]}
+    branch=${branches[$submodule]}
+    workspace=${GITHUB_WORKSPACE}'/'${pathes[$submodule]}
+    gitapi=$(echo "$url" | sed 's/github.com/api.github.com\/repos/g')'/branches/'$branch
+    echo $url $gitapi $branch $workspace
+done
+
+comment+=" **NOT** up to date"
+printf "%s\n\n" "$comment"
+
+if [[ $flag_sync=='true' ]]; then
+    exit 0
+else
+    exit 0
+fi

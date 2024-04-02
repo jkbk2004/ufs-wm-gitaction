@@ -14,17 +14,17 @@ env:
 
 jobs:
   pre:
-    name: Preprocess
-    runs-on: ubuntu-latest
+    #name: Preprocess
+    #runs-on: ubuntu-latest
 
-    steps:
-    - name: Share helper id
-      run: echo -n ${{ github.run_id }} >~/id_file
+    #steps:
+    #- name: Share helper id
+    #  run: echo -n ${{ github.run_id }} >~/id_file
 
-    - uses: actions/cache@v2
-      with:
-        path: ~/id_file
-        key: helperid-${{ github.event.workflow_run.id }}
+    #- uses: actions/cache@v2
+    #  with:
+    #    path: ~/id_file
+    #    key: helperid-${{ github.event.workflow_run.id }}
 
   repocheck:
     name: Repo check

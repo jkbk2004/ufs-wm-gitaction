@@ -13,7 +13,7 @@ env:
   AUTH: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  pre:
+  #pre:
     #name: Preprocess
     #runs-on: ubuntu-latest
 
@@ -33,7 +33,7 @@ jobs:
     steps:
     - name: Check up-to-dateness and post comment
       run: |
-        echo $helperid
+        #echo $helperid
         head_sha=${{ github.event.pull_request.head.sha }}
         head_brc=${{ github.event.pull_request.head.ref }}
         head_url=${{ github.event.pull_request.head.repo.html_url }}
